@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "three": "^0.150.1",
+    "three-particle-system": "^1.0.12"
+  }
+}
