@@ -4,15 +4,176 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title></title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Lato&family=Poppins:wght@100&family=Shantell+Sans:ital,wght@0,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Lato&family=Shantell+Sans:ital,wght@0,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400&family=Lato&family=Poppins:wght@100&family=Shantell+Sans:ital,wght@0,300;1,400&family=Sono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Heebo:wght@300;400&family=Lato&family=Poppins:wght@100;400&family=Shantell+Sans:ital,wght@0,300;1,400&family=Sono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Heebo:wght@300;400&family=Lato&family=Poppins:wght@100&family=Shantell+Sans:ital,wght@0,300;1,400&family=Sono:wght@400;500&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+
+    display: flex;
+
+    padding: 30px;
+
+    width: 100%;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-height: 100vh;
+
+    background: #202124;
+
+}
+.navbar-links{
+    display: flex;
+    list-style:none;
+    gap: 7rem;
+    font-size: 22px;
+    font-family: 'Lato', sans-serif;
+    transform: translateX(800px);
+    padding-bottom: 850px;
+    position: absolute;
+    padding-right: 50px;
+    cursor: pointer;
+    color: #fff;
+}
+.logo{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-size: 65px;
+   transform: translateX(-700px);
+  
+    
+}    
+.container p {
+    font-size: 3rem;
+    padding: 0.5rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    overflow: hidden;
+    transform: translateX(-700px);
+    color: white;
+    font-size: 5rem;
+  }
+  .container p span.typed-text {
+    font-weight: normal;
+   
+ 
+    
+  }
+  .container p span.cursor {
+    display: inline-block;
+    background-color: #ccc;
+    margin-left: 0.1rem;
+    width: 3px;
+    transform: translateX(20px);
+    animation: blink 1s infinite;
+  }
+  .container p span.cursor.typing {
+    animation: none;
+  }
+  @keyframes bri {
+    0%  { background-color: #ccc; }
+    49% { background-color: #ccc; }
+    50% { background-color: transparent; }
+    99% { background-color: transparent; }
+    100%  { background-color: #ccc; }
+  }
+  .img{
+position: absolute;
+transform: translateX(450px);
+padding-top: 100px;
+
+
+  }
+
+
+    </style>
 </head>
 <body>
+  
+  <div class="navbar-links">
+<li id="Login">Login</li>
+<li id="SignUp">Sign Up</li>
+  </div>
+  <div class="container" draggable="false">
+    <p draggable="false">Your<br> <span draggable="false" class="typedtext"></span><span class="cursor">&nbsp;</span></p>
+  </div>
+  <div class="img">
+    <img src="img/3D-Transparent-Pie-Chart-Infographic (4).png" width="400px" draggable="false">
+  </div>
 
-    <button onclick="przejdzDoDrugiejStrony()">Przejdź do drugiej strony</button>
-    <script>
-    function przejdzDoDrugiejStrony() {
-        window.location.href = "register.html";
-      }
-    </script>
+<script>
+
+  const typedTextSpan = document.querySelector(".typedtext");
+const cursorSpan = document.querySelector(".cursor");
+ const  li1  =  document.getElementById('Login')
+ const  li2 = document.getElementById('SignUp')
+const textArray = ["Protector"];
+const typingDelay = 200;
+const erasingDelay = 100;
+const newTextDelay = 2000;
+let textArrayIndex = 0;
+let charIndex = 0;
+
+function type() {
+  if (charIndex < textArray[textArrayIndex].length) {
+    if(cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+    typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(type, typingDelay);
+  } 
+  else {
+    cursorSpan.classList.remove("typing");
+  	setTimeout(erase, newTextDelay);
+  }
+}
+
+function erase() {
+	if (charIndex > 0) {
+    if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+    typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
+    charIndex--;
+    setTimeout(erase, erasingDelay);
+  } 
+  else {
+    cursorSpan.classList.remove("typing");
+    textArrayIndex++;
+    if(textArrayIndex>=textArray.length) textArrayIndex=0;
+    setTimeout(type, typingDelay + 1100);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+  if(textArray.length) setTimeout(type, newTextDelay + 250);
+});
+li1.addEventListener('mouseover' , function(){
+    this.style.color = 'black  ' 
+})
+li1.addEventListener('mouseleave' , function(){
+    this.style.color = 'white'
+})
+li2.addEventListener('mouseover' , function(){
+    this.style.color = 'black'
+})
+li2.addEventListener('mouseleave' , function(){
+    this.style.color = 'white'
+})
+
+</script>
 </body>
+
+<script src="app.js"></script>
 </html>
